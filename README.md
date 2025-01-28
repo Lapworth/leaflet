@@ -8,6 +8,6 @@ This is a simple Leaflet map project hosted on GitHub Pages.
 - Layer control for switching basemaps.
 
 ## Live Demo
-Check out the live demo [here](https://Lapworth.github.io/leaflet/).
+Check out the live demo [here](https://Lapworth.github.io/leaflet/thisisanhtml.html).
 
 
