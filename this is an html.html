@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Map</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Basic styling for the map container -->
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Map initialization script -->
+  <script>
+    // Initialize the map and set its view to a specific latitude, longitude, and zoom level
+    const map = L.map('map').setView([-33.8688, 151.2093], 13); // Centered on Sydney, NSW
+
+    // Add OpenStreetMap as the default base layer
+    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add NSW SIX Maps as an optional base layer
+    const nswSixMapsLayer = L.tileLayer('https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Base_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; <a href="https://www.six.nsw.gov.au/">NSW SIX Maps</a>'
+    });
+
+    // Add a layer control to switch between base layers
+    const baseLayers = {
+      "OpenStreetMap": osmLayer,
+      "NSW SIX Maps": nswSixMapsLayer
+    };
+    L.control.layers(baseLayers).addTo(map);
+
+    // Add a marker with a popup (optional)
+    L.marker([-33.8688, 151.2093]).addTo(map)
+      .bindPopup('Sydney, NSW<br>Welcome to the map!')
+      .openPopup();
+
+    // Add a marker with a popup
+    L.marker([51.5, -0.09]).addTo(map)
+      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+      .openPopup();
+
+    // Optional: Add a circle
+    L.circle([51.508, -0.11], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500
+    }).addTo(map).bindPopup('I am a circle!');
+
+    // Optional: Add a polygon
+    L.polygon([
+      [51.509, -0.08],
+      [51.503, -0.06],
+      [51.51, -0.047]
+    ]).addTo(map).bindPopup('I am a polygon!');
+  </script>
+</body>
+</html>
